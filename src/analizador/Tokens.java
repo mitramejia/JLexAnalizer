@@ -1,0 +1,6 @@
+package analizador;
+
+public enum Tokens
+{
+	SUMA, RESTA, MULTIPLICACION, DIVISION, POTENCIA, ERROR, NUMERO,VALIDO,SEPARADOR;
+}
