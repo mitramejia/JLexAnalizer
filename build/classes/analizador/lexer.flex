@@ -7,6 +7,7 @@ import static analizador.Tokens.*;
 D=[0-9]
 Esp=[\ \t\r\n]
 WHITE=[ \t\r\n]
+IDENTIFICADOR=[A-Za-z_]+[0-9]*
 %{
 public String Tipo;
 %}
@@ -16,8 +17,10 @@ public String Tipo;
 "-" {return RESTA;}
 "*" {return MULTIPLICACION;}
 "/" {return DIVISION;}
-"^" {return POTENCIA;}
+    "^" {return POTENCIA;}
+{IDENTIFICADOR} {Tipo=yytext(); return IDENTIFICADOR;}
 {D}+{Esp}* {Tipo=yytext(); return NUMERO;}
 {D}+("*"|"+"|"-"|"/"|"^"){D}+{Esp}* {Tipo=yytext(); return VALIDO;}
 {Esp} {Tipo=yytext(); return SEPARADOR;}
 .*|,+ {return ERROR;}
+

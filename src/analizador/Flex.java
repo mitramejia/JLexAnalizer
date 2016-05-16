@@ -59,3 +59,12 @@ public class Flex
 
 
 }
+
+
+/* 
+Regex
+
+Identificaor: (?![0-9])\w+
+Matricula: ($[0-9]{2}\-)([0-9]{4})
+
+*/
