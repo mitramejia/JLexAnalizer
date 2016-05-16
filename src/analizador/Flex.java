@@ -14,7 +14,7 @@ public class Flex
 			String path = "//Users//mitramejia//AnalizadorJLex//src//analizador//lexer.flex";
 			generadorLexer(path);
 			
-			/*
+			
 				String input = (JOptionPane.showInputDialog("Ingrese la expresion"));
 				AnalizadorJFlex analizador = new AnalizadorJFlex(new StringReader(input));
 				for(int i=0;i<input.length();i++)
@@ -36,7 +36,7 @@ public class Flex
 					}
 				}
 				System.out.println("Expresion Regular="+analizador.yylex());		
-			*/
+			
 			
 			
 		}
@@ -53,7 +53,7 @@ public class Flex
                 jflex.Main.generate(file);
              
                 
-		//JFlex.Main.generate(file);
+//		JFlex.Main.generate(file);
                 
 	}
 
