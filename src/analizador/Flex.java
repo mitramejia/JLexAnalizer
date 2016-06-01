@@ -11,7 +11,12 @@ public class Flex
 	{
 		try
 	 	{
-			String path = "//Users//mitramejia//AnalizadorJLex//src//analizador//lexer.flex";
+                        
+                        AnalizadorJFrame jframe  = new AnalizadorJFrame();
+                        jframe.setVisible(true);
+                        
+			/*
+                        String path = "//Users//mitramejia//AnalizadorJLex//src//analizador//lexer.flex";
 			generadorLexer(path);
 			
 			
@@ -25,7 +30,7 @@ public class Flex
 						System.out.println(analizer.yylex());
 					}
 					if(input.charAt(i)=='+' || input.charAt(i)=='-' || input.charAt(i)=='*' || input.charAt(i)=='/' || input.charAt(i)=='^')
-					{
+					{   
 						AnalizadorJFlex analizer = new AnalizadorJFlex(new StringReader(String.valueOf(input.charAt(i))));
 						System.out.println(analizer.yylex());
 					}
@@ -37,7 +42,7 @@ public class Flex
 				}
 				System.out.println("Expresion Regular="+analizador.yylex());		
 			
-			
+                              */
 			
 		}
 		catch(Exception ex)
@@ -65,7 +70,7 @@ public class Flex
 Regex
 
 Identificaor: (?![0-9])\w+
-Matricula: ($[0-9]{2}\-)([0-9]{4})
+Matricula: ('[0-9]{2}\-[0-9]{4}') Lo trato como un String para que el analizador lexico no piense que es una resta 13-9124
 
 1) En muchos lenguajes de programacion, los identicadores se definen como secuencias de letras, digitos y subrayados que no empiecen por un digito. Escribe la expresion regular correspondiente, luego realice un analizador léxico que identifique este patrón.
 

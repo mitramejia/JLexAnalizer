@@ -34,10 +34,14 @@ class AnalizadorJFlex {
    * Translates characters to character classes
    */
   private static final String ZZ_CMAP_PACKED = 
-    "\11\0\1\2\1\12\1\13\1\13\1\12\22\0\1\2\6\0\1\4"+
-    "\2\0\1\7\1\6\1\0\1\5\1\0\1\10\12\1\7\0\32\3"+
-    "\3\0\1\11\1\3\1\0\32\3\12\0\1\13\u1fa2\0\1\13\1\13"+
-    "\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\udfe6\0";
+    "\10\0\1\0\1\2\1\16\1\17\1\17\1\16\22\0\1\2\7\0"+
+    "\1\11\1\15\1\6\1\5\1\0\1\4\1\0\1\7\1\13\1\1"+
+    "\1\13\1\1\1\13\3\1\1\12\1\14\7\0\1\3\1\3\1\3"+
+    "\1\3\1\3\1\3\1\3\1\3\1\3\2\3\1\3\1\3\1\3"+
+    "\3\3\1\3\1\3\1\3\6\3\3\0\1\10\1\3\1\0\1\3"+
+    "\1\3\1\3\1\3\1\3\1\3\1\3\1\3\1\3\2\3\1\3"+
+    "\1\3\1\3\3\3\1\3\1\3\1\3\6\3\12\0\1\17\u1fa2\0"+
+    "\1\17\1\17\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\udfe6\0";
 
   /** 
    * Translates characters to character classes
@@ -50,12 +54,13 @@ class AnalizadorJFlex {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\2\1\1\2\1\3\1\4\1\1\1\5\1\6\1\7"+
-    "\1\10\1\11\1\3\1\2\1\1\1\2\1\4\1\1"+
-    "\1\12\1\1\2\12\5\1\1\13";
+    "\2\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10"+
+    "\1\11\1\1\1\3\2\2\1\1\1\2\1\4\1\1"+
+    "\1\2\1\1\1\12\1\1\3\12\1\1\1\12\1\1"+
+    "\1\12\1\1\1\13\7\1\1\14";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[27];
+    int [] result = new int[39];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -80,13 +85,14 @@ class AnalizadorJFlex {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\14\0\30\0\14\0\44\0\60\0\14\0\14"+
-    "\0\14\0\14\0\14\0\74\0\110\0\124\0\140\0\154"+
-    "\0\170\0\204\0\220\0\234\0\250\0\264\0\300\0\314"+
-    "\0\330\0\344\0\14";
+    "\0\0\0\20\0\40\0\20\0\60\0\20\0\20\0\20"+
+    "\0\20\0\20\0\100\0\120\0\140\0\160\0\200\0\220"+
+    "\0\240\0\260\0\300\0\320\0\340\0\360\0\u0100\0\u0110"+
+    "\0\u0120\0\u0130\0\u0140\0\u0150\0\u0160\0\u0170\0\340\0\u0180"+
+    "\0\u0190\0\u01a0\0\u01b0\0\u01c0\0\u01d0\0\u01e0\0\20";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[27];
+    int [] result = new int[39];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -110,20 +116,32 @@ class AnalizadorJFlex {
 
   private static final String ZZ_TRANS_PACKED_0 =
     "\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11"+
-    "\1\12\1\13\1\14\1\0\12\2\2\0\1\2\1\3"+
-    "\1\15\2\2\5\16\1\17\1\0\1\2\1\20\1\2"+
-    "\1\5\6\2\2\0\1\2\1\21\10\2\16\0\2\2"+
-    "\1\15\7\2\1\17\1\0\1\2\1\22\10\2\4\0"+
-    "\1\17\7\0\1\17\1\0\1\2\1\20\10\2\2\0"+
-    "\1\2\1\23\10\2\2\0\1\2\1\22\1\24\7\2"+
-    "\1\25\1\0\5\2\1\26\4\2\2\0\2\2\1\24"+
-    "\7\2\1\25\3\0\1\25\7\0\1\25\1\0\1\2"+
-    "\1\27\10\2\2\0\1\2\1\30\10\2\2\0\1\2"+
-    "\1\31\10\2\2\0\1\2\1\32\10\2\2\0\4\2"+
-    "\1\33\5\2\2\0";
+    "\1\12\1\13\3\3\1\2\1\14\1\0\16\2\2\0"+
+    "\1\2\1\15\1\16\1\2\5\17\1\2\3\15\1\2"+
+    "\1\20\1\0\1\2\1\21\1\2\1\5\6\2\3\21"+
+    "\1\2\2\0\12\2\1\22\3\2\22\0\1\2\1\23"+
+    "\1\16\1\2\1\24\4\17\1\2\3\23\1\2\1\20"+
+    "\1\0\2\2\1\16\13\2\1\20\1\0\1\2\1\25"+
+    "\10\2\3\25\1\2\4\0\1\20\13\0\1\20\1\0"+
+    "\1\2\1\21\10\2\3\21\1\2\2\0\13\2\1\26"+
+    "\2\2\2\0\1\2\1\23\1\16\1\2\5\17\1\2"+
+    "\3\23\1\2\1\20\1\0\1\2\1\27\10\2\3\27"+
+    "\1\2\2\0\1\2\1\25\1\30\7\2\3\25\1\2"+
+    "\1\31\1\0\14\2\1\32\1\2\2\0\1\2\1\33"+
+    "\1\30\7\2\3\33\1\2\1\31\1\0\2\2\1\30"+
+    "\13\2\1\31\3\0\1\31\13\0\1\31\1\0\15\2"+
+    "\1\34\2\0\1\2\1\35\1\30\7\2\3\35\1\2"+
+    "\1\31\1\0\4\2\1\36\11\2\2\0\1\2\1\37"+
+    "\1\30\7\2\3\37\1\2\1\31\1\0\1\2\1\40"+
+    "\10\2\3\40\1\2\2\0\1\2\1\41\10\2\3\41"+
+    "\1\2\2\0\1\2\1\42\10\2\3\42\1\2\2\0"+
+    "\4\2\1\43\11\2\2\0\1\2\1\44\10\2\3\44"+
+    "\1\2\2\0\1\2\1\45\10\2\3\45\1\2\2\0"+
+    "\1\2\1\46\10\2\3\46\1\2\2\0\1\2\1\47"+
+    "\10\2\3\47\1\2\2\0";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[240];
+    int [] result = new int[496];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -161,10 +179,10 @@ class AnalizadorJFlex {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\13\1\1\11\17\1";
+    "\13\1\1\11\33\1";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[27];
+    int [] result = new int[39];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -263,7 +281,7 @@ public String Tipo;
     char [] map = new char[0x110000];
     int i = 0;  /* index in packed string  */
     int j = 0;  /* index in unpacked array */
-    while (i < 94) {
+    while (i < 178) {
       int  count = packed.charAt(i++);
       char value = packed.charAt(i++);
       do map[j++] = value; while (--count > 0);
@@ -560,47 +578,51 @@ public String Tipo;
           case 1: 
             { return ERROR;
             }
-          case 12: break;
+          case 13: break;
           case 2: 
             { Tipo=yytext(); return NUMERO;
             }
-          case 13: break;
+          case 14: break;
           case 3: 
             { Tipo=yytext(); return SEPARADOR;
             }
-          case 14: break;
+          case 15: break;
           case 4: 
             { Tipo=yytext(); return IDENTIFICADOR;
             }
-          case 15: break;
+          case 16: break;
           case 5: 
             { return RESTA;
             }
-          case 16: break;
+          case 17: break;
           case 6: 
             { return SUMA;
             }
-          case 17: break;
+          case 18: break;
           case 7: 
             { return MULTIPLICACION;
             }
-          case 18: break;
+          case 19: break;
           case 8: 
             { return DIVISION;
             }
-          case 19: break;
+          case 20: break;
           case 9: 
             { return POTENCIA;
             }
-          case 20: break;
+          case 21: break;
           case 10: 
             { Tipo=yytext(); return VALIDO;
             }
-          case 21: break;
+          case 22: break;
           case 11: 
             { Tipo=yytext(); return MATRICULA;
             }
-          case 22: break;
+          case 23: break;
+          case 12: 
+            { Tipo=yytext(); return TELEFONO;
+            }
+          case 24: break;
           default:
             zzScanError(ZZ_NO_MATCH);
         }
