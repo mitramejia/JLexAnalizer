@@ -5,6 +5,7 @@ import java.io.StringReader;
 import java.util.Stack;
 import javax.swing.JOptionPane;
 
+
 public class Flex {
 
     private static final char L_PAREN = '(';
@@ -15,10 +16,9 @@ public class Flex {
 
 //            AnalizadorJFrame jframe = new AnalizadorJFrame();
 //            jframe.setVisible(true);
-    
-            String path = getWorkingDirectory() + "\\src\\analizador\\lexer.flex";
+  
             //Conseguir el path relativo del lexer.flex. Más conveniente.
-            generadorLexer(path);
+            generadorLexer(getLexerFilePath());
 
             String input = (JOptionPane.showInputDialog("Ingrese la expresion"));
             AnalizadorJFlex analizador = new AnalizadorJFlex(new StringReader(input));
@@ -90,10 +90,19 @@ public class Flex {
         return stack.isEmpty();
     }
 
-    private static String getWorkingDirectory() {
+    private static String getLexerFilePath() {
         //Método para conseguir el path.
         String dir = System.getProperty("user.dir");
-        return dir;
+        String os = System.getProperty("os.name");
+        String lexerFilePath;
+        if ( os == "Mac OS X" || os == "Linux") {
+            lexerFilePath = dir + "\\src\\analizador\\lexer.flex";
+        } else {
+            lexerFilePath = dir + "//src//analizador//lexer.flex";
+
+        }
+        
+        return lexerFilePath;
     }
 
 }
