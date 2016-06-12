@@ -4,19 +4,29 @@ import java.io.File;
 import java.io.StringReader;
 import java.util.Stack;
 import javax.swing.JOptionPane;
-
+import static javax.swing.SwingUtilities.invokeLater;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Flex {
 
     private static final char L_PAREN = '(';
     private static final char R_PAREN = ')';
+    private static final Logger LOGGER = Logger.getLogger(Flex.class.getName());
 
     public static void main(String[] args) {
-        try {
+        LOGGER.log(Level.INFO, "Logger Name: {0}", LOGGER.getName());
 
-//            AnalizadorJFrame jframe = new AnalizadorJFrame();
-//            jframe.setVisible(true);
-  
+        try {
+            generadorLexer(getLexerFilePath());        
+            AnalizadorJFrame jframe = new AnalizadorJFrame();
+            
+            invokeLater(new Runnable() {
+            public void run() {
+                jframe.setVisible(true);
+            }
+        });
+            /*
             //Conseguir el path relativo del lexer.flex. Más conveniente.
             generadorLexer(getLexerFilePath());
 
@@ -45,9 +55,11 @@ public class Flex {
                 //Si el stack no está vacio, imprimir mensaje.
                 System.out.println("La expresión es invalida. Confirme los paréntesis e intente de nuevo.");
             }
+            
+            */
 
         } catch (Exception ex) {
-            System.out.println("ERROR LEXICO");
+            LOGGER.log(Level.SEVERE, "ERROR LEXICO", ex);
         }
 
     }
@@ -95,13 +107,13 @@ public class Flex {
         String dir = System.getProperty("user.dir");
         String os = System.getProperty("os.name");
         String lexerFilePath;
-        if ( os == "Mac OS X" || os == "Linux") {
-            lexerFilePath = dir + "\\src\\analizador\\lexer.flex";
-        } else {
+        if ( "Mac OS X".equals(os) || "Linux".equals(os)) {
             lexerFilePath = dir + "//src//analizador//lexer.flex";
+        } else {
+            lexerFilePath = dir + "\\src\\analizador\\lexer.flex";
 
         }
-        
+        LOGGER.info("Lexer File Path"+ lexerFilePath);
         return lexerFilePath;
     }
 
