@@ -114,7 +114,9 @@ public class ExpressionPanel extends JPanel implements ActionListener{
                 try {
                     String input = (String)jTextFieldExpression.getText();
                     Flex flex = new Flex();
-                    flex.evaluateExpression(input);
+                    String[] result = flex.evaluateExpression(input);
+                    jLabelTerms.setText(result[0]);
+                    jLabelResult.setText(result[1]);
                     manager.increaseSectionCount();
                 } catch(Exception e) {
                     LOGGER.log(Level.SEVERE, "Error: {0}", e);
@@ -126,8 +128,9 @@ public class ExpressionPanel extends JPanel implements ActionListener{
         
         jButtonAddExpression.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
-               
-               
+               if(manager.getExpressioCount() == 10){
+                   // Disable Button
+               }
             }
         });
     

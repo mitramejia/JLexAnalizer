@@ -1,6 +1,9 @@
 package analizador;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.io.StringReader;
 import java.util.Stack;
 import javax.swing.JOptionPane;
@@ -14,50 +17,66 @@ public class Flex {
     private final Logger LOGGER = Logger.getLogger(Flex.class.getName());
     
     // Genera el archivo lexer cuando el objeto Flex es instanciado
-    public Flex) {
+    public Flex() {
         File file = new File(getLexerFilePath());
         jflex.Main.generate(file);
     }
     
     // Recibe una expresion y la evalua
     public String[] evaluateExpression(String input){
+        String[] result = null;
+        String terms = "";
+        String validate = "";
+        
+        
         try {
             
-            AnalizadorJFlex analizador = new AnalizadorJFlex(new StringReader(input));
-            String result[] = null;    
+            
             for (int i = 0; i < input.length(); i++) {
                 if (input.charAt(i) >= '0' && input.charAt(i) <= '9') {
                     AnalizadorJFlex analizer = new AnalizadorJFlex(new StringReader(String.valueOf(input.charAt(i))));
-                    result[0] += analizer.yylex();
+                    terms += "\n" +analizer.yylex().toString();
                 }
                 if (input.charAt(i) == '+' || input.charAt(i) == '-' || input.charAt(i) == '*' || input.charAt(i) == '/' || input.charAt(i) == '^') {
                     AnalizadorJFlex analizer = new AnalizadorJFlex(new StringReader(String.valueOf(input.charAt(i))));
-                    result[0] += "/n" + analizer.yylex();
+                    terms += "\n" + analizer.yylex().toString();
                 }
                 if (input.charAt(i) == ' ') {
                     AnalizadorJFlex analizer = new AnalizadorJFlex(new StringReader(String.valueOf(input.charAt(i))));
-                    result[0] += "/n" + analizer.yylex();
+                    terms += "\n" + analizer.yylex().toString() + "\n";
                 }
             }
-
+            
+            System.err.println(terms);
+  
             if (isBalanced(input) == true) {
                 //si el stack está vacio, ejecutar este proceso.
-                System.out.println("Expresion Regular=" + analizador.yylex());
-                LOGGER.log(Level.SEVERE, "ERROR LEXICO", ex);
+                AnalizadorJFlex analizador = new AnalizadorJFlex(new StringReader(input));
+              
+                System.out.println("Expresion Regular="+analizador.yylex().toString());
                 
-                System.out.println("La expresión está balanceada.");
+                if (!"VALIDO".equals(getTokenFromConsole(analizador.yylex()))){
+                    validate = "Incorrecto";
+                }
+                else {
+                    validate = "Correcto";
+                }
             } else {
                 //Si el stack no está vacio, imprimir mensaje.
                 System.out.println("La expresión es invalida. Confirme los paréntesis e intente de nuevo.");
+                validate = "Incorrecto. Confirme los paréntesis e intente de nuevo.";
             }
-            
-            return result;
+           
         
-          } catch (Exception ex) {
+          } catch (IOException ex) {
             LOGGER.log(Level.SEVERE, "ERROR LEXICO", ex);
         }
         
+        result[0] = terms;
+        result[1] = validate;
         
+        
+        return result;
     }
 
 
@@ -107,27 +126,25 @@ public class Flex {
         return lexerFilePath;
     }
     
-    public void resetSections(){
-        this.setSectionCount(0);
-    }
-
-    public void increaseSectionCount(){
-        this.sectionCount++;
-    }
     
-    /**
-     * @return the sectionCount
-     */
-    public int getSectionCount() {
-        return sectionCount;
-    }
-   
-
-    /**
-     * @param sectionCount the sectionCount to set
-     */
-    public void setSectionCount(int sectionCount) {
-        this.sectionCount = sectionCount;
+    public String getTokenFromConsole(Tokens token){
+         // Create a stream to hold the output
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    PrintStream ps = new PrintStream(baos);
+    // IMPORTANT: Save the old System.out!
+    PrintStream old = System.out;
+    // Tell Java to use your special stream
+    System.setOut(ps);
+    // Print some output: goes to your special stream
+    System.out.println(token);
+    // Put things back
+    System.out.flush();
+    System.setOut(old);
+    // Show what happened
+    System.out.println("Here: " + baos.toString());
+    System.out.flush();
+    return baos.toString();
+    
     }
 
 }
