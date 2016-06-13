@@ -4,62 +4,64 @@ import java.io.File;
 import java.io.StringReader;
 import java.util.Stack;
 import javax.swing.JOptionPane;
-
+import static javax.swing.SwingUtilities.invokeLater;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Flex {
-
-    private static final char L_PAREN = '(';
-    private static final char R_PAREN = ')';
-
-    public static void main(String[] args) {
+    private final char L_PAREN = '(';
+    private final char R_PAREN = ')';
+    private final Logger LOGGER = Logger.getLogger(Flex.class.getName());
+    
+    // Genera el archivo lexer cuando el objeto Flex es instanciado
+    public Flex) {
+        File file = new File(getLexerFilePath());
+        jflex.Main.generate(file);
+    }
+    
+    // Recibe una expresion y la evalua
+    public String[] evaluateExpression(String input){
         try {
-
-//            AnalizadorJFrame jframe = new AnalizadorJFrame();
-//            jframe.setVisible(true);
-  
-            //Conseguir el path relativo del lexer.flex. Más conveniente.
-            generadorLexer(getLexerFilePath());
-
-            String input = (JOptionPane.showInputDialog("Ingrese la expresion"));
+            
             AnalizadorJFlex analizador = new AnalizadorJFlex(new StringReader(input));
+            String result[] = null;    
             for (int i = 0; i < input.length(); i++) {
                 if (input.charAt(i) >= '0' && input.charAt(i) <= '9') {
                     AnalizadorJFlex analizer = new AnalizadorJFlex(new StringReader(String.valueOf(input.charAt(i))));
-                    System.out.println(analizer.yylex());
+                    result[0] += analizer.yylex();
                 }
                 if (input.charAt(i) == '+' || input.charAt(i) == '-' || input.charAt(i) == '*' || input.charAt(i) == '/' || input.charAt(i) == '^') {
                     AnalizadorJFlex analizer = new AnalizadorJFlex(new StringReader(String.valueOf(input.charAt(i))));
-                    System.out.println(analizer.yylex());
+                    result[0] += "/n" + analizer.yylex();
                 }
                 if (input.charAt(i) == ' ') {
                     AnalizadorJFlex analizer = new AnalizadorJFlex(new StringReader(String.valueOf(input.charAt(i))));
-                    System.out.println(analizer.yylex());
+                    result[0] += "/n" + analizer.yylex();
                 }
             }
 
             if (isBalanced(input) == true) {
                 //si el stack está vacio, ejecutar este proceso.
                 System.out.println("Expresion Regular=" + analizador.yylex());
+                LOGGER.log(Level.SEVERE, "ERROR LEXICO", ex);
+                
                 System.out.println("La expresión está balanceada.");
             } else {
                 //Si el stack no está vacio, imprimir mensaje.
                 System.out.println("La expresión es invalida. Confirme los paréntesis e intente de nuevo.");
             }
-
-        } catch (Exception ex) {
-            System.out.println("ERROR LEXICO");
+            
+            return result;
+        
+          } catch (Exception ex) {
+            LOGGER.log(Level.SEVERE, "ERROR LEXICO", ex);
         }
-
+        
+        
     }
 
-    public static void generadorLexer(String path) {
-        File file = new File(path);
-        jflex.Main.generate(file);
 
-//		JFlex.Main.generate(file);
-    }
-
-    public static boolean isBalanced(String s) {
+    public boolean isBalanced(String s) {
         //Función para confirmar si está balanceado.
         Stack<Character> stack = new Stack<>();
         for (int i = 0; i < s.length(); i++) {
@@ -89,20 +91,43 @@ public class Flex {
         //Devuelve un true o false dependiendo del stack.
         return stack.isEmpty();
     }
-
-    private static String getLexerFilePath() {
-        //Método para conseguir el path.
+    
+    // Método para conseguir el path del archivo lexer.
+    private String getLexerFilePath() {
+       
         String dir = System.getProperty("user.dir");
         String os = System.getProperty("os.name");
         String lexerFilePath;
-        if ( os == "Mac OS X" || os == "Linux") {
-            lexerFilePath = dir + "\\src\\analizador\\lexer.flex";
-        } else {
+        if ( "Mac OS X".equals(os) || "Linux".equals(os)) {
             lexerFilePath = dir + "//src//analizador//lexer.flex";
-
+        } else {
+            lexerFilePath = dir + "\\src\\analizador\\lexer.flex";
         }
-        
+        LOGGER.info("Lexer File Path"+ lexerFilePath);
         return lexerFilePath;
+    }
+    
+    public void resetSections(){
+        this.setSectionCount(0);
+    }
+
+    public void increaseSectionCount(){
+        this.sectionCount++;
+    }
+    
+    /**
+     * @return the sectionCount
+     */
+    public int getSectionCount() {
+        return sectionCount;
+    }
+   
+
+    /**
+     * @param sectionCount the sectionCount to set
+     */
+    public void setSectionCount(int sectionCount) {
+        this.sectionCount = sectionCount;
     }
 
 }
