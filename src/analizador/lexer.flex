@@ -22,5 +22,5 @@ public String Tipo;
 ")" {return PAREN_RGT;}
 "^" {return POTENCIA;}
 
-({Prt}*({D}+|{D}*\.{D}+)+{Prt}*+{Op}*{Prt}*)*({D}+|{D}*\.{D}+)+{Prt}* {Tipo=yytext(); return VALIDO;}
+([\-\+]?{Prt}*({D}+|{D}*\.{D}+)+{Prt}*+{Op}*{Prt}*)*({D}+|{D}*\.{D}+)+{Prt}* {Tipo=yytext(); return VALIDO;}
 .*|,+ {return ERROR;}
