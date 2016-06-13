@@ -8,17 +8,18 @@ package analizador;
 /**
  *
  * @author mitramejia
+ * This class counts how many expressions have been e
  */
-public class SectionManager {
+public class ExpressionCounter {
     
     private int sectionCount;
     
-    public SectionManager() {
+    public ExpressionCounter() {
         this.sectionCount = 0;
     }
     
-    public void resetSections(){
-        this.setSectionCount(0);
+    public void resetCount() {
+        this.setExpressioCount(0);
     }
 
     public void increaseSectionCount(){
@@ -28,15 +29,14 @@ public class SectionManager {
     /**
      * @return the sectionCount
      */
-    public int getSectionCount() {
+    public int getExpressioCount() {
         return sectionCount;
     }
    
-
     /**
      * @param sectionCount the sectionCount to set
      */
-    public void setSectionCount(int sectionCount) {
+    public void setExpressioCount(int sectionCount) {
         this.sectionCount = sectionCount;
     }
     
